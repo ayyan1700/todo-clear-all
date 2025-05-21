@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 24px;
+            text-align: center;
+        }
+
+        #task-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+
+        #Add {
+            width: 80%;
+            padding: 8px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        #result {
+            width: 80%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #result:hover {
+            background-color: #0056b3;
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        li {
+            background-color: #f1f1f1;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 5px 10px;
+            background-color: #ff4c4c;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #cc3a3a;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="task-container">
+        <h1>Add Task</h1>
+        <input id="Add" type="text" placeholder="Enter task">
+        <button id="result">Add Task</button>
+        <ul id="show"></ul>
+    </div>
+
+    <script>
+        var Add = document.getElementById("Add");
+        var ul = document.getElementById("show");
+        var addTask = [];
+
+        document.getElementById("result").addEventListener("click", function () {
+            if (Add.value === "") {
+                alert("First write a task in the field.");
+                return;
+            }
+
+            addTask.push(Add.value);
+            Add.value = "";
+
+            var li = document.createElement("li");
+            li.textContent = addTask[addTask.length - 1];
+
+            var button = document.createElement("button");
+            button.textContent = "Clear All";
+
+            button.addEventListener("click", function () {
+                addTask = [];
+                ul.innerHTML = "";
+                console.log("All tasks cleared:", addTask);
+            });
+
+            li.appendChild(button);
+            ul.appendChild(li);
+
+            console.log(addTask);
+        });
+    </script>
+</body>
+
+</html>
